@@ -1,0 +1,14 @@
+HOW TO USE ENV
+--------------
+To enter (env)
+	1) cd into project directory
+	2) run "python3 -m venv env" in terminal to create virtual env
+	3) run "source env/bin/activate" to activate virtual env
+	4) if seeing (base) (env), run "conda deactivate" to exit out of base
+
+To exit (env)
+	1) run "deactivate"
+
+
+	
+
