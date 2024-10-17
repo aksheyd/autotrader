@@ -1,4 +1,4 @@
-"""This is our main file."""
-print("Hello World")
+for i in range(10):
+    print(i)
 
-# bruh
+print("bruh")
