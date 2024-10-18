@@ -1,0 +1,4 @@
+pip freeze > requirements.txt
+
+
+^^ this is how you put all your dependencies so someone else can install the packages necessary
