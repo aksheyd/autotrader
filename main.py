@@ -1,15 +1,18 @@
 """Make trades automatically using Nancy Pelosi's stock trades"""
+
 from alphavantage_api.time_series import TimeSeries
+from alphavantage_api.helper_functions import is_valid_date
 
 def main():
     """Main"""
     time_series = TimeSeries()
     symbol = str(input("Enter stock ticker: "))
-    date = str(input("Enter trading day you want to analyze, in XXXX-XX(month)-XX(day) format: "))
+    date = str(input("Enter trading day you want to analyze, in YYYY-MM-DD format: "))
     data = time_series.get_time_series_daily(symbol)
 
-    if len(date) != 10:
-        print("Date is in incorrect format or falls on weekend")
+
+    if not is_valid_date(date):
+        print("Date is in incorrect format")
         return
     if 'Error Message' in data:
         print("Stock ticker not found!")
