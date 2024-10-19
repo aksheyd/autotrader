@@ -10,7 +10,6 @@ def main():
     date = str(input("Enter trading day you want to analyze, in YYYY-MM-DD format: "))
     data = time_series.get_time_series_daily(symbol)
 
-
     if not is_valid_date(date):
         print("Date is in incorrect format")
         return
