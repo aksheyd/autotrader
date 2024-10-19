@@ -1,0 +1,3 @@
+TODO:
+1. add sql database for trade information
+2. start scraping nancy pelosi stuff
