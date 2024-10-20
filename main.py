@@ -40,9 +40,14 @@ def main():
             return
 
         dates = get_date_range(start_date, end_date)
+        total_gain = float(data['Time Series (Daily)'][str(dates[-1])]['2. high']) - \
+                     float(data['Time Series (Daily)'][str(dates[0])]['2. high'])
+
         for i in dates:
             print(symbol + " stock high on " + i + ":",
                   data['Time Series (Daily)'][i]['2. high'])
+
+        print("Stock movement over date range: $" + str(total_gain))
 
 if __name__ == '__main__':
     main()
