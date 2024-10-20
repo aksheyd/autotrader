@@ -7,8 +7,11 @@ from alphavantage_api.helper_functions import get_date_range
 def main():
     """Main"""
     time_series = TimeSeries()
-    option = int(input("Enter (1) to analyze trading data from a single days, or (2) to analyze data from a range of dates: "))
-    
+    option = int(input(
+        "Enter (1) to analyze trading data from a single day, "
+        "or (2) to analyze data from a range of dates: "
+    ))
+
     if option == 1:
         symbol = str(input("Enter stock ticker: "))
         date = str(input("Enter trading day you want to analyze, in YYYY-MM-DD format: "))
@@ -35,7 +38,7 @@ def main():
         if 'Error Message' in data:
             print("Stock ticker not found")
             return
-        
+
         dates = get_date_range(start_date, end_date)
         for i in dates:
             print(symbol + " stock high on " + i + ":",
