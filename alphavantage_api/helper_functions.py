@@ -3,6 +3,7 @@
 import json
 import os
 import re
+from datetime import datetime, timedelta
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(current_dir, 'config.json')
@@ -18,3 +19,18 @@ def is_valid_date(date):
     """Checks if user-inputted date is in correct format for API call"""
     pattern = r'^\d{4}-\d{2}-\d{2}$'
     return bool(re.match(pattern, date))
+
+def get_date_range(start_date_str, end_date_str):
+    """Incremenents start date until reaches end date"""
+    start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+    end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
+    dates = []
+    current_date = start_date
+
+    while current_date <= end_date:
+        is_weekend = current_date.weekday() >= 5
+        if not is_weekend:
+            dates.append(current_date.strftime("%Y-%m-%d"))
+        current_date += timedelta(days = 1)
+
+    return dates
