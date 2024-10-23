@@ -42,7 +42,7 @@ class database:
     def create(self):
         if self.type == 'stocks':
             self.create_stocks_table()
-        elif self.type == 'nancy':
+        elif self.type == 'nancy': 
             self.create_nancy_table()
     
     def insert(self, data):
