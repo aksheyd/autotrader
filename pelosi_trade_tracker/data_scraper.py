@@ -15,4 +15,4 @@ rows = soup.select('tbody tr')
 
 for row in rows:
     ticker_header = row.find('a', class_='text-txt-interactive')
-    print(ticker_header)
+    print(ticker_header.get_text(strip = True))
