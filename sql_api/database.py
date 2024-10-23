@@ -35,7 +35,7 @@ class database:
             date TEXT NOT NULL,
             time TEXT NOT NULL
         )
-        ''')
+        ''') 
         self.conn.commit()
         self.conn.close()
     
