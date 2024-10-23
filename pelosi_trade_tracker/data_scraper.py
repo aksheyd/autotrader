@@ -15,11 +15,11 @@ rows = soup.select('tbody tr')
 
 for row in rows:
     ticker = row.find('a', class_ = 'text-txt-interactive')
-    date = row.find('div', class_ = 'text-size-3 font-medium')
     bought = row.find('span', class_ = 'tx-type--buy')
     sold = row.find('span', class_ = 'tx-type--sell')
     exchange = row.find('span', class_ = 'tx-type--exchange')
     value = row.find('span', class_ = 'mt-1')
+    date = row.find('div', class_ = 'text-size-3 font-medium')
 
     if bought:
         print(
