@@ -16,5 +16,5 @@ soup = BeautifulSoup(r.content, 'html.parser')
 rows = soup.select('tbody tr')
 
 for row in rows:
-    company_name_tag = row.find('a', class_='text-txt-interactive')
-    print(company_name_tag)
+    ticker_header = row.find('a', class_='text-txt-interactive')
+    print(ticker_header)
