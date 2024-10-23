@@ -9,8 +9,6 @@ try:
     r = requests.get(URL, timeout = 10)
 except requests.Timeout:
     print("Request timed out")
-except requests.RequestException as e:
-    print(f"An error occurred: {e}")
 
 soup = BeautifulSoup(r.content, 'html.parser')
 rows = soup.select('tbody tr')
