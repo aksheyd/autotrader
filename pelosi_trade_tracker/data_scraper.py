@@ -83,7 +83,9 @@ def main():
     # pelosi trades URL = https://www.capitoltrades.com/politicians/P000197
     # get_pelosi_trades = DataScraper()
     # name_output = "TRADER NAME: " + \
-    #     get_pelosi_trades.get_politician_name("https://www.capitoltrades.com/politicians/P000197")
+    #     get_pelosi_trades.get_politician_name(
+    #         "https://www.capitoltrades.com/politicians/P000197"
+    #     )
     # print(name_output)
     # for i in name_output:
     #     print("-", end = '')
@@ -94,9 +96,11 @@ def main():
     # mcconnell trades URL= https://www.capitoltrades.com/politicians/M000355
     get_mcconnell_trades = DataScraper()
     name_output = "TRADER NAME: " + \
-        get_mcconnell_trades.get_politician_name("https://www.capitoltrades.com/politicians/M000355")
+        get_mcconnell_trades.get_politician_name(
+            "https://www.capitoltrades.com/politicians/M000355"
+        )
     print(name_output)
-    for i in name_output:
+    for _ in name_output:
         print("-", end = '')
     print()
     get_mcconnell_trades.parse_url("https://www.capitoltrades.com/politicians/M000355")
