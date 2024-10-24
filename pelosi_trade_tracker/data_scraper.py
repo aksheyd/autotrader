@@ -9,6 +9,8 @@ class DataScraper:
     def __init__(self):
         """trade_data holds data from parse_url"""
         self.trade_data = []
+        self.name = ""
+        self.name_set = False
 
     def get_politician_name(self, url):
         """takes in URL input, outputs politician name associated with trades"""
@@ -19,7 +21,9 @@ class DataScraper:
 
         soup = BeautifulSoup(r.content, 'html.parser')
         name = soup.find('h1').text
-        return name
+        self.name = name
+        self.name_set = True
+        return self.name
 
     def parse_url(self, url):
         """takes in URL input, stores stock trade data in trade_data"""
@@ -68,6 +72,12 @@ class DataScraper:
 
     def print_trade_data(self):
         """Prints the stored trade data."""
+        if self.name_set is True:
+            name_output = "TRADER NAME: " + self.name
+            print(name_output)
+            for _ in name_output:
+                print("-", end = '')
+            print()
         for data in self.trade_data:
             print(
                 f"Stock: {data['stock_name']}\n"
@@ -81,28 +91,14 @@ class DataScraper:
 def main():
     """Main"""
     # pelosi trades URL = https://www.capitoltrades.com/politicians/P000197
-    # get_pelosi_trades = DataScraper()
-    # name_output = "TRADER NAME: " + \
-    #     get_pelosi_trades.get_politician_name(
-    #         "https://www.capitoltrades.com/politicians/P000197"
-    #     )
-    # print(name_output)
-    # for i in name_output:
-    #     print("-", end = '')
-    # print()
-    # get_pelosi_trades.parse_url("https://www.capitoltrades.com/politicians/P000197")
-    # get_pelosi_trades.print_trade_data()
+    get_pelosi_trades = DataScraper()
+    get_pelosi_trades.get_politician_name("https://www.capitoltrades.com/politicians/P000197")
+    get_pelosi_trades.parse_url("https://www.capitoltrades.com/politicians/P000197")
+    get_pelosi_trades.print_trade_data()
 
     # mcconnell trades URL= https://www.capitoltrades.com/politicians/M000355
     get_mcconnell_trades = DataScraper()
-    name_output = "TRADER NAME: " + \
-        get_mcconnell_trades.get_politician_name(
-            "https://www.capitoltrades.com/politicians/M000355"
-        )
-    print(name_output)
-    for _ in name_output:
-        print("-", end = '')
-    print()
+    get_mcconnell_trades.get_politician_name("https://www.capitoltrades.com/politicians/M000355")
     get_mcconnell_trades.parse_url("https://www.capitoltrades.com/politicians/M000355")
     get_mcconnell_trades.print_trade_data()
 
