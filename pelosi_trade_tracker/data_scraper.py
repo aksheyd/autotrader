@@ -11,18 +11,10 @@ class DataScraper:
         self.name = ""
         self.name_set = False
 
-    def get_politician_name(self, url):
-        """takes in URL input, outputs politician name associated with trades"""
-        try:
-            r = requests.get(url, timeout = 5)
-        except requests.Timeout:
-            print("Request timed out")
-
-        soup = BeautifulSoup(r.content, 'html.parser')
-        name = soup.find('h1').text
-        self.name = name
-        self.name_set = True
-        return self.name
+    def want_politician_name(self, want_name = False):
+        """if user wants name, will get it when parsing URL"""
+        if want_name is True:
+            self.name_set = True
 
     def parse_url(self, url):
         """takes in URL input, stores stock trade data in trade_data"""
@@ -32,6 +24,11 @@ class DataScraper:
             print("Request timed out")
 
         soup = BeautifulSoup(r.content, 'html.parser')
+
+        if self.name_set is True:
+            name = soup.find('h1').text
+            self.name = name
+
         rows = soup.select('tbody tr')
 
         for row in rows:
@@ -91,13 +88,13 @@ def main():
     """Main"""
     # pelosi trades URL = https://www.capitoltrades.com/politicians/P000197
     get_pelosi_trades = DataScraper()
-    get_pelosi_trades.get_politician_name("https://www.capitoltrades.com/politicians/P000197")
+    get_pelosi_trades.want_politician_name(True)
     get_pelosi_trades.parse_url("https://www.capitoltrades.com/politicians/P000197")
     get_pelosi_trades.print_trade_data()
 
     # mcconnell trades URL= https://www.capitoltrades.com/politicians/M000355
     get_mcconnell_trades = DataScraper()
-    get_mcconnell_trades.get_politician_name("https://www.capitoltrades.com/politicians/M000355")
+    get_mcconnell_trades.want_politician_name(True)
     get_mcconnell_trades.parse_url("https://www.capitoltrades.com/politicians/M000355")
     get_mcconnell_trades.print_trade_data()
 
