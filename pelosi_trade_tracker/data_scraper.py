@@ -37,8 +37,8 @@ for row in rows:
         f"Value: ${value.get_text(strip = True)}\n"
 
         f"Date Traded: {trade_date.get_text(strip = True)} "
-        f"{trade_year.get_text(strip=True)}\n"
-        
+        f"{trade_year.get_text(strip = True)}\n"
+
         f"Date Reported: {report_date.get_text(strip = True)} "
         f"{report_year.get_text(strip = True)}\n"
     )
