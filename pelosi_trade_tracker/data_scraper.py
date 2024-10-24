@@ -14,34 +14,31 @@ soup = BeautifulSoup(r.content, 'html.parser')
 rows = soup.select('tbody tr')
 
 for row in rows:
-    ticker = row.find('a', class_ = 'text-txt-interactive')
-    bought = row.find('span', class_ = 'tx-type--buy')
-    sold = row.find('span', class_ = 'tx-type--sell')
-    exchange = row.find('span', class_ = 'tx-type--exchange')
+    stock_name = row.find('a', class_ = 'text-txt-interactive')
+    ticker = row.find('span', class_ = 'q-field')
     value = row.find('span', class_ = 'mt-1')
-    date = row.find('div', class_ = 'text-size-3 font-medium')
+    trade_date = row.find_all('div', class_ = 'text-size-3 font-medium')[1]
+    trade_year = row.find_all('div', class_ = 'text-size-2 text-txt-dimmer')[1]
+    report_date = row.find('div', class_ = 'text-size-3 font-medium')
+    report_year = row.find('div', class_ = 'text-size-2 text-txt-dimmer')
 
-    if bought:
-        print(
-            "Stock: " + ticker.get_text(strip = True) + "\n" +
-            "Order Type: Buy" + "\n" + 
-            "Value: $" + value.get_text(strip = True) + "\n" + 
-            "Date: " + date.get_text(strip = True),
-            "\n"
-        )
-    elif sold:
-        print(
-            "Stock: " + ticker.get_text(strip = True) + "\n" +
-            "Order Type: Sell" + "\n" + 
-            "Value: $" + value.get_text(strip = True) + "\n" + 
-            "Date: " + date.get_text(strip = True),
-            "\n"
-        )
-    elif exchange:
-        print(
-            "Stock: " + ticker.get_text(strip = True) + "\n" +
-            "Order Type: Exchange" + "\n" + 
-            "Value: $" + value.get_text(strip = True) + "\n" + 
-            "Date: " + date.get_text(strip = True),
-            "\n"
-        )
+    ORDER_TYPE = None
+    if row.find('span', class_ = 'tx-type--buy'):
+        ORDER_TYPE = "Buy"
+    elif row.find('span', class_ = 'tx-type--sell'):
+        ORDER_TYPE = "Sell"
+    elif row.find('span', class_ = 'tx-type--exchange'):
+        ORDER_TYPE = "Exchange"
+
+    print(
+        f"Stock: {stock_name.get_text(strip = True)}\n"
+        f"Ticker: {ticker.get_text(strip = True)}\n"
+        f"Order Type: {ORDER_TYPE}\n"
+        f"Value: ${value.get_text(strip = True)}\n"
+
+        f"Date Traded: {trade_date.get_text(strip = True)} "
+        f"{trade_year.get_text(strip=True)}\n"
+        
+        f"Date Reported: {report_date.get_text(strip = True)} "
+        f"{report_year.get_text(strip = True)}\n"
+    )
