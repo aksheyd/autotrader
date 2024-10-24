@@ -6,18 +6,22 @@ from bs4 import BeautifulSoup
 class DataScraper:
     """scrapes data from inputted URL, returns useful stock trading data"""
     def __init__(self):
-        """trade_data holds data from parse_url"""
+        """
+            trade_data holds data from parse_url, 
+            name holds politician name (if user wants)
+            name_set is bool that allows user to decide if they want name 
+        """
         self.trade_data = []
         self.name = ""
         self.name_set = False
 
     def want_politician_name(self, want_name = False):
-        """if user wants name, will get it when parsing URL, else ignore"""
+        """if user wants name, will get it when parsing URL, else ignore trader name"""
         if want_name is True:
             self.name_set = True
 
     def increment_url(self, url, page_num):
-        """Increments page number of url to store all trades instead of only whats on first page"""
+        """Increments page number of url to store all trades instead of only what's on first page"""
         new_url = url.split('page=')[0] + f"page={page_num + 1}"
         return new_url
 
@@ -61,7 +65,10 @@ class DataScraper:
             })
 
     def parse_url(self, url):
-        """takes in URL input, stores stock trade data in trade_data"""
+        """
+            takes in URL input, assesses how many pages of trades the politician has made,
+            and sends each page to process_rows to be scraped
+        """
         try:
             r = requests.get(url, timeout = 5)
         except requests.Timeout:
@@ -95,7 +102,10 @@ class DataScraper:
             first_page += 1
 
     def print_trade_data(self):
-        """Prints the stored trade data. Name is only printed if user requests"""
+        """
+            Prints the stored trade data. 
+            Name is only printed if user requests (based on another fxn)
+        """
         if self.name_set is True:
             name_output = "TRADER NAME: " + self.name
             print(name_output)
