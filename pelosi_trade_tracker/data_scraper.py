@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 
 class DataScraper:
     """scrapes data from inputted URL, returns useful stock trading data"""
-
     def __init__(self):
         """trade_data holds data from parse_url"""
         self.trade_data = []
@@ -71,7 +70,7 @@ class DataScraper:
             })
 
     def print_trade_data(self):
-        """Prints the stored trade data."""
+        """Prints the stored trade data. Name is only printed if user requests"""
         if self.name_set is True:
             name_output = "TRADER NAME: " + self.name
             print(name_output)
